@@ -1,0 +1,6 @@
+use_frameworks!
+target 'MTools_Tests' do
+  pod 'MTools', :path => '../'
+  
+  
+end
