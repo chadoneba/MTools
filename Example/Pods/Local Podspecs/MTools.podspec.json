@@ -1,0 +1,22 @@
+{
+  "name": "MTools",
+  "version": "0.1.0",
+  "summary": "A short description of MTools.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/drumsland@gmail.com/MTools",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "drumsland@gmail.com": "drumsland@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/drumsland@gmail.com/MTools.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "MTools/Classes/**/*"
+}

@@ -1,0 +1,6 @@
+framework module MTools {
+  umbrella header "MTools-umbrella.h"
+
+  export *
+  module * { export * }
+}
