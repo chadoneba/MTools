@@ -33,7 +33,11 @@ public class JsonChecker {
 
     public init(data:Data?) {
         guard data != nil else { return }
-        self.json = JSON(data: data!)
+        do {
+            try self.json = try JSON(data: data!)
+        } catch  {
+            
+        }
     }
 
     public init(data:String?) {

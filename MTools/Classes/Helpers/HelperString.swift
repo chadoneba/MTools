@@ -88,26 +88,26 @@ extension String {
 //    }
 //}
 
-func converFromHtml(html: String?) -> NSAttributedString {
-    var resutltString = NSMutableAttributedString(string:"")
-    
-    guard let html = html else {
-        return resutltString
-    }
-
-    if let htmlData = html.data(using: String.Encoding.unicode) {
-        do {
-            resutltString = try NSMutableAttributedString(data: htmlData,
-                                                   options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                                                             NSFontAttributeName: UIFont.defaultFront(ofSize: 16)],
-                                                   documentAttributes: nil)
-        } catch let e as NSError {
-            print("Couldn't parse \(html): \(e.localizedDescription)")
-        }
-    }
-    
-    return  resutltString
-}
+//func converFromHtml(html: String?) -> NSAttributedString {
+//    var resutltString = NSMutableAttributedString(string:"")
+//    
+//    guard let html = html else {
+//        return resutltString
+//    }
+//
+//    if let htmlData = html.data(using: String.Encoding.unicode) {
+//        do {
+//            resutltString = try NSMutableAttributedString(data: htmlData,
+//                                                   options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+//                                                             NSFontAttributeName: UIFont.defaultFront(ofSize: 16)],
+//                                                   documentAttributes: nil)
+//        } catch let e as NSError {
+//            print("Couldn't parse \(html): \(e.localizedDescription)")
+//        }
+//    }
+//    
+//    return  resutltString
+//}
 
 
 public func trimFloat(number:String?)->String {

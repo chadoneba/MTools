@@ -24,65 +24,65 @@ public protocol PresenterProtocol {
 
 
 public class BasePresenter:RouterProtocol,sessionNotification {
-    var connecter:PureManager!
-    var delegate:PresenterProtocol?
-    var router:MainRouter?
+    public var connecter:PureManager!
+    public var delegate:PresenterProtocol?
+    public var router:MainRouter?
     
-    init() {
+    public init() {
         self.connecter = PureManager.TheInstance
         self.connecter.delegate = self
     }
     
-    func invalidate() {
+    public func invalidate() {
         DispatchQueue.main.async {
             self.delegate?.logOut()
         }
     }
     
-    func reload(){
+    public func reload(){
         DispatchQueue.main.async {
             self.delegate?.reload()
         }
     }
     
-    func pop() {
+    public func pop() {
         DispatchQueue.main.async {
             self.delegate?.pop()
         }
     }
     
-    func popToTarget(_ to:[UIViewController]) {
+    public func popToTarget(_ to:[UIViewController]) {
         DispatchQueue.main.async {
             self.delegate?.popToTarget(to)
         }
     }
     
-    func route(to:UIViewController) {
+    public func route(to:UIViewController) {
         DispatchQueue.main.async {
             self.delegate?.route(to: to)
         }
     }
 
 
-    func showDialog(dialog: UIAlertController) {
+    public func showDialog(dialog: UIAlertController) {
         DispatchQueue.main.async {
             self.delegate?.showDialog(dialog: dialog)
         }
     }
 
-    func loader() {
+    public func loader() {
         DispatchQueue.main.async {
             self.delegate?.showLoader()
         }
     }
     
-    func showError(_ msg:String){
+    public func showError(_ msg:String){
         DispatchQueue.main.async {
             self.delegate?.showError(message: msg)
         }
     }
 
-    func successDialog(msg:String,reloadData:Bool = true, title:String = "", handlerOne1:@escaping ()->Void) -> UIAlertController {
+    public func successDialog(msg:String,reloadData:Bool = true, title:String = "", handlerOne1:@escaping ()->Void) -> UIAlertController {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler:{ action in

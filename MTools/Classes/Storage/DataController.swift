@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-public class DataController: NSObject,DataControllerDelegate {
+public class DataController: NSObject {
 
     static let instance = DataController()
     

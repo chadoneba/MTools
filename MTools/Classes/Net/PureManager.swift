@@ -11,19 +11,19 @@ import SwiftyJSON
 
 let DEBUGLOCAL = "debugLocal"
 
-protocol Parceble {
+public protocol Parceble {
     init(json:[String:Any]!)
 }
 
-protocol sessionNotification {
+public protocol sessionNotification {
     func invalidate()
 }
 
-extension Parceble {
+public extension Parceble {
     
     // Вывод свойств классов протокола Parceble в словарь с фильтрацией по словарю ключей
     
-    func toJson(_ template:[String] = [])->[String:String] {
+    public func toJson(_ template:[String] = [])->[String:String] {
         guard template.count > 0 else {
             return [:]
         }
@@ -41,7 +41,7 @@ extension Parceble {
     
     // Собственно функция фильтрации
     
-    func getDictBy(mirror:Mirror,template:[String])->[String:String] {
+    public func getDictBy(mirror:Mirror,template:[String])->[String:String] {
         var return_dict = [String:String]()
         
         var doesApplyAll = false
@@ -62,7 +62,7 @@ extension Parceble {
         return return_dict
     }
 
-    func getNotParcedParams(byname:String = "") -> [String:Any] {
+    public func getNotParcedParams(byname:String = "") -> [String:Any] {
         return [:]
     }
     
@@ -71,7 +71,7 @@ extension Parceble {
 
 // Основной класс работы с сетью
 
-class PureManager:NSObject,URLSessionDelegate {
+public class PureManager:NSObject,URLSessionDelegate {
     var session:URLSession!
     var session_delegate:URLSessionDelegate?
     var host:String!
@@ -79,11 +79,11 @@ class PureManager:NSObject,URLSessionDelegate {
     let debugServerAdr = "http://192.168.1.72:8002"
 
     
-    func logout() {
+    public func logout() {
         self.session.invalidateAndCancel()
     }
     
-    func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
+    public func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
         self.session = nil
         self.delegate?.invalidate()
     }
@@ -98,17 +98,17 @@ class PureManager:NSObject,URLSessionDelegate {
     }
     
     
-    override init()
+    public override init()
     {
         super.init()
         self.getSession()
     }
     
-    func getSession() {
+    public func getSession() {
         self.session = URLSession(configuration: self.getConfiguration(), delegate: self, delegateQueue: nil)
     }
     
-    func getConfiguration()->URLSessionConfiguration
+    public func getConfiguration()->URLSessionConfiguration
     {
         let configuration1 = URLSessionConfiguration.default
         configuration1.allowsCellularAccess = true
@@ -117,7 +117,7 @@ class PureManager:NSObject,URLSessionDelegate {
         return configuration1
     }
     
-    func decorate<T, U>(_ function: @escaping (T) -> U, decoration: @escaping (T, U) -> U) -> (T) -> U {
+    public func decorate<T, U>(_ function: @escaping (T) -> U, decoration: @escaping (T, U) -> U) -> (T) -> U {
         return { args in
             decoration(args, function(args))
         }
@@ -128,7 +128,7 @@ class PureManager:NSObject,URLSessionDelegate {
     // params - строковый словарь параметров
     // handler - колбек
     
-    open func connect(path:String,params:[String:Any],image:UIImage?,handler:@escaping (Data?,URLResponse?,Error?)-> Void) {
+    public func connect(path:String,params:[String:Any],image:UIImage?,handler:@escaping (Data?,URLResponse?,Error?)-> Void) {
         guard self.host != nil else {
             self.delegate!.invalidate()
             return
@@ -180,14 +180,14 @@ class PureManager:NSObject,URLSessionDelegate {
     }
     
     
-    open func connect(path:String,params:[String:Any],handler:@escaping (Data?,URLResponse?,Error?)-> Void)
+    public func connect(path:String,params:[String:Any],handler:@escaping (Data?,URLResponse?,Error?)-> Void)
     {
         self.connect(path: path, params: params, image: nil, handler: handler)
     }
     
     // Автоматическая функция, возвращает заголовок типа если в параметрах есть русские буквы
     
-    func get_headers(params:[String:String])->[String:String]{
+    public func get_headers(params:[String:String])->[String:String]{
         for (_,value) in params {
             if value.isCyrillic {
                 return ["content-type": "text/html; charset=utf-8"]
@@ -200,7 +200,7 @@ class PureManager:NSObject,URLSessionDelegate {
         
     // это genetic функция получаем массив из словарей отдаем массив из структур
     
-    func parceTo<T:Parceble>(array:Array<[String:Any]>)->Array<T>
+    public func parceTo<T:Parceble>(array:Array<[String:Any]>)->Array<T>
     {
         return array.map { item in
             return T(json: item)
@@ -213,7 +213,7 @@ class PureManager:NSObject,URLSessionDelegate {
     
     // Функция для назначения нового url
     
-    func setHost(url:String) {
+    public func setHost(url:String) {
         UserData.url = url
         self.host = url
     }
