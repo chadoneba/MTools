@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-protocol PresenterProtocol {
+public protocol PresenterProtocol {
     func reload()
     func logOut()
-    func show_loader()
+    func showLoader()
     func showError(message: String)
     func route(to:UIViewController)
     func pop()
@@ -20,12 +20,10 @@ protocol PresenterProtocol {
     func showDialog(dialog:UIAlertController)
     func get_storyboard_name()->String
     func set_presenter(presenter_par:RouterProtocol)
-    
-    
 }
 
 
-class BasePresenter:RouterProtocol,sessionNotification {
+public class BasePresenter:RouterProtocol,sessionNotification {
     var connecter:PureManager!
     var delegate:PresenterProtocol?
     var router:MainRouter?
@@ -36,9 +34,6 @@ class BasePresenter:RouterProtocol,sessionNotification {
     }
     
     func invalidate() {
-        
-        
-        
         DispatchQueue.main.async {
             self.delegate?.logOut()
         }
@@ -77,7 +72,7 @@ class BasePresenter:RouterProtocol,sessionNotification {
 
     func loader() {
         DispatchQueue.main.async {
-            self.delegate?.show_loader()
+            self.delegate?.showLoader()
         }
     }
     
@@ -86,24 +81,9 @@ class BasePresenter:RouterProtocol,sessionNotification {
             self.delegate?.showError(message: msg)
         }
     }
-//    func successDialog(msg:String,reloadData:Bool = true) -> UIAlertController {
-//        let alert = UIAlertController(title: "FS Mobile", message: msg, preferredStyle: .alert)
-//        
-//        alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler:{ action in
-//            if reloadData == true {
-//                self.load()
-//            } else {
-//                
-//            }
-//            
-//        })
-//            
-//            
-//        )
-//        return alert
-//    }
-    func successDialog(msg:String,reloadData:Bool = true, handlerOne1:@escaping ()->Void) -> UIAlertController {
-        let alert = UIAlertController(title: "FS Mobile", message: msg, preferredStyle: .alert)
+
+    func successDialog(msg:String,reloadData:Bool = true, title:String = "", handlerOne1:@escaping ()->Void) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler:{ action in
             if reloadData == true {

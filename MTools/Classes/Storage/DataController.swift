@@ -14,6 +14,10 @@ public class DataController: NSObject,DataControllerDelegate {
     
     var managedObjectContext: NSManagedObjectContext
     private var storageName = "default"
+    
+    public func setStorageName(name:String) {
+        self.storageName = name
+    }
 
     public override init() {
 

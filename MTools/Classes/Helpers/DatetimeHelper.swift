@@ -9,22 +9,22 @@
 import Foundation
 
 
-class DateHelper {
+public class DateHelper {
     var formater = DateFormatter()
     var format = "dd.MM.yyyy"
     
-    init() {
+    public init() {
         formater.dateFormat = format
     }
     
-    func toDate(str:String) -> Date? {
+    public func toDate(str:String) -> Date? {
         guard !str.isEmpty else {
             return Date()
         }
         return self.formater.date(from: str)
     }
     
-    func toStr(date:Date) -> String {
+    public func toStr(date:Date) -> String {
         return self.formater.string(from: date)
     }
 }

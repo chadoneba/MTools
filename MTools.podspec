@@ -40,6 +40,4 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit', 'CoreData'
   s.dependency 'SwiftyJSON', '4.0.0-alpha.1'
-  s.dependency 'APESuperHUD', '~> 1.1'
-  s.dependency 'Atributika'
 end

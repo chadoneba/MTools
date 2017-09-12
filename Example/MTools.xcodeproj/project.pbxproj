@@ -191,10 +191,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MTools_Tests/Pods-MTools_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/MTools/MTools.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MTools.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

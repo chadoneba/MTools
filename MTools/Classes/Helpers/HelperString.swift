@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Atributika
 // Code from http://stackoverflow.com/questions/38722464/check-if-string-latin-or-cyrillic 
 // need to write own
 
@@ -111,32 +110,7 @@ func converFromHtml(html: String?) -> NSAttributedString {
 }
 
 
-// Перевод стоки в AttributeString
-func convert(string:String?)->NSAttributedString {
-    var tmp:String!
-    
-    let b = Style("b").font(.boldSystemFont(ofSize: MOLBULAK_FONT_SIZE_DEFAULT))
-        .foregroundColor(.black)
-    let small = Style("small").font(.boldSystemFont(ofSize: MOLBULAK_FONT_SIZE_SMALL))
-    
-    if string != nil {
-        tmp = string
-    }
-    else {
-        tmp = ""
-    }
-    let resAttr = tmp.style(tags: [b,small])
-            .styleAll(Style.font(.systemFont(ofSize: MOLBULAK_FONT_SIZE_DEFAULT)))
-            .attributedString
-        return resAttr
-    }
-
-func fontFromSize(size:CGFloat) -> UIFont {
-    return UIFont.defaultFront(ofSize: size)
-}
-
-
-func trimFloat(number:String?)->String {
+public func trimFloat(number:String?)->String {
     guard number != nil else {
         return "0.00"
     }

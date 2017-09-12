@@ -7,36 +7,32 @@
 //
 
 import UIKit
-import APESuperHUD
 
-class BaseVC:UIViewController, PresenterProtocol {
+public class BaseVC:UIViewController, PresenterProtocol {
     
 //    override var preferredStatusBarStyle: UIStatusBarStyle {
 //        return .lightContent
 //    }
 
+    public func showLoader() {
+        //TODO: override
+    }
 
-    override func viewDidLoad() {
+    public func hideLoader() {
+        //TODO: override
+    }
+
+
+    public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        
-       
-        
-       
-        // кастомный навбар
-        self.setupBackButtonAndLogo()
-        
-//        self.view.backgroundColor = UIColor(patternImage: UIImage(named:"bg_list.png")!)
-        APESuperHUD.appearance.animateInTime = 0.2
-        APESuperHUD.appearance.animateOutTime = 0.2
-        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 223.0/255.0, green: 233.0/255.0, blue: 247.0/255.0, alpha: 1.0)
     }
     
     
-    func showError(message: String) {
-        APESuperHUD.removeHUD(animated: true, presentingView: self.view)
-        let alert = UIAlertController.init(title: "FS Mobile", message: message, preferredStyle: .alert)
+    public func showError(message: String) {
+
+        // TODO: take name of app
+        
+        let alert = UIAlertController.init(title: "", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction.init(title: "Закрыть", style: .default))
         self.present(alert, animated: true) {}
     }
@@ -46,7 +42,7 @@ class BaseVC:UIViewController, PresenterProtocol {
 
     }
     
-    func pop() {
+    public func pop() {
         guard self.navigationController != nil else {
             self.dismiss(animated: true)
             return
@@ -55,7 +51,7 @@ class BaseVC:UIViewController, PresenterProtocol {
         
     }
     
-    func popToTarget(_ to:[UIViewController]) {
+    public func popToTarget(_ to:[UIViewController]) {
         let conditions = to.map {
             ($0 as! BaseVC).get_storyboard_name()
         }
@@ -74,16 +70,17 @@ class BaseVC:UIViewController, PresenterProtocol {
         
     }
     
-    func showDialog(dialog: UIAlertController) {
+    
+    public func showDialog(dialog: UIAlertController) {
         self.present(dialog, animated: true, completion: nil)
     }
 
-    func reload() {
-        APESuperHUD.removeHUD(animated: true, presentingView: self.view)
+    public func reload() {
+        self.hideLoader()
     }
     
     
-    func route(to:UIViewController){
+    public func route(to:UIViewController){
 
         if to.modalPresentationStyle == .overCurrentContext {
             if to.navigationController != nil {
@@ -97,27 +94,24 @@ class BaseVC:UIViewController, PresenterProtocol {
         }
     }
     
-    func get_storyboard_name()->String {
+    public func get_storyboard_name()->String {
         return "NO"
     }
     
-    func logOut() {
-        let auth = MainRouter.TheInstance.fly_to(act: .AUTH)
-        
-        UIApplication.shared.delegate?.window??.rootViewController = auth
-    }
-
-
-
+//    func logOut() {
+//        let auth = MainRouter.TheInstance.fly_to(act: .AUTH)
+//
+//        UIApplication.shared.delegate?.window??.rootViewController = auth
+//    }
     
-    func set_presenter(presenter_par: RouterProtocol) {
+    public func logOut() {
         
     }
-    
-    func show_loader(){
-        APESuperHUD.showOrUpdateHUD(loadingIndicator: .standard, message: "Идет загрузка...", presentingView: self.view)
-    }
 
+    public func set_presenter(presenter_par: RouterProtocol) {
+        
+    }
+    
     // Проверка на зоплененость филдов
     func validationTxtField(fields: [UITextField],_ err:String) -> Bool {
         var result = false
@@ -128,7 +122,9 @@ class BaseVC:UIViewController, PresenterProtocol {
             }
             }
         if !result {
-            let alert = UIAlertController(title: "FS Mobile", message: err, preferredStyle: .alert)
+            // TODO: Take app name
+            
+            let alert = UIAlertController(title: "", message: err, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Понятно", style: .default, handler: { _ in
                 fields[0].becomeFirstResponder()
             }));

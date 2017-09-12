@@ -6,7 +6,7 @@
 import Foundation
 import SwiftyJSON
 
-func objToJsonString(_ params:Any) -> String {
+public func objToJsonString(_ params:Any) -> String {
     guard let data = objToData(_params: params) else {
         return ""
     }
@@ -14,38 +14,38 @@ func objToJsonString(_ params:Any) -> String {
 }
 
 
-class JsonChecker {
+public class JsonChecker {
 
 
 
     var json:JSON?
 
-    var getDictionary:Dictionary<String,Any>? {
+    public var getDictionary:Dictionary<String,Any>? {
         return self.json!.dictionaryObject
     }
 
-    subscript(key:String) -> Any? {
+    public subscript(key:String) -> Any? {
         guard self.json!.dictionaryObject != nil else {
             return nil
         }
         return self.json!.dictionaryObject![key]
     }
 
-    init(data:Data?) {
+    public init(data:Data?) {
         guard data != nil else { return }
         self.json = JSON(data: data!)
     }
 
-    init(data:String?) {
+    public init(data:String?) {
         guard data != nil else { return }
         self.json = JSON(parseJSON: data!)
     }
 
-    init(data:[AnyHashable : Any]) {
+    public init(data:[AnyHashable : Any]) {
         self.json = JSON(data)
     }
 
-    func getModelByField<T:Parceble>(_ key:String? = nil) -> T? {
+    public func getModelByField<T:Parceble>(_ key:String? = nil) -> T? {
         guard self.json != nil else { return nil }
         if key != nil && self.json!.dictionaryObject != nil {
             guard let result = json!.dictionaryValue[key!] else { return nil }
@@ -56,7 +56,7 @@ class JsonChecker {
         return T(json: result)
     }
 
-    func getListModelByField<T:Parceble>(_ key:String? = nil) -> [T]? {
+    public func getListModelByField<T:Parceble>(_ key:String? = nil) -> [T]? {
         guard self.json != nil else { return nil }
         if key != nil && self.json!.dictionaryObject != nil {
             guard let result = json!.dictionaryValue[key!] else { return nil }
@@ -68,7 +68,7 @@ class JsonChecker {
     }
 }
 
-func objToData(_ params:Any) -> Data? {
+public func objToData(_ params:Any) -> Data? {
     var data:Data?
     do {
         data = try JSONSerialization.data(withJSONObject: params)

@@ -10,17 +10,17 @@ import Foundation
 
 // Расширение для Типа словарей
 
-extension Dictionary {
+public extension Dictionary {
    
     // Знак
-    static func += (left:inout [Key:Value],right:[Key:Value]){
+    public static func += (left:inout [Key:Value],right:[Key:Value]){
         for obj in right {
             left.updateValue(obj.value, forKey: obj.key)
         }
     }
     
     // Сумирование словарей
-    static func + (left:[Key:Value],right:[Key:Value])->[Key:Value]{
+    public static func + (left:[Key:Value],right:[Key:Value])->[Key:Value]{
         var result = left
         for obj in right {
             result.updateValue(obj.value, forKey: obj.key)
@@ -29,7 +29,7 @@ extension Dictionary {
     }
     
     // Замена ключа с сохранением связанного значения
-    mutating func updateKey(from:Key,to:Key){
+    public mutating func updateKey(from:Key,to:Key){
         guard self.index(forKey: from) != nil else {
             return
         }
@@ -37,7 +37,7 @@ extension Dictionary {
         self.updateValue(tmp.value, forKey: to)
     }
     
-    func filterAsDict(_ isIncluded: (Key,Value?) -> Bool) -> [Key:Value?] {
+    public func filterAsDict(_ isIncluded: (Key,Value?) -> Bool) -> [Key:Value?] {
         var result = [Key:Value]()
         for (Key,Value) in self {
             if isIncluded(Key,Value) {
@@ -52,7 +52,7 @@ extension Dictionary {
 
 
 
-func groupArrayByKey<T>(array:[T],key:@escaping (T) -> String) -> Dictionary<String,Array<T>> {
+public func groupArrayByKey<T>(array:[T],key:@escaping (T) -> String) -> Dictionary<String,Array<T>> {
     var result:Dictionary<String,Array<T>> = [:]
     for item in array {
         var value = result[key(item)]
@@ -67,7 +67,7 @@ func groupArrayByKey<T>(array:[T],key:@escaping (T) -> String) -> Dictionary<Str
     return result
 }
 
-func groupObjectByKey<T>(array:[T],key:@escaping (T) -> String) -> Dictionary<String,T> {
+public func groupObjectByKey<T>(array:[T],key:@escaping (T) -> String) -> Dictionary<String,T> {
     var result:Dictionary<String,T> = [:]
     for item in array {
         result.updateValue(item, forKey: key(item))

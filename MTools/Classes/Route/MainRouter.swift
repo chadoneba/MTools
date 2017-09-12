@@ -11,9 +11,14 @@ import UIKit
 
 // Протокол для обобщения разных подклассов презентеров
 
-protocol RouterProtocol {
+public protocol RouterProtocol {
     var delegate:PresenterProtocol? { get set }
 }
+
+public protocol RouteTable {
+    
+}
+
 
 // Основной класс организации роутинга
 
@@ -49,6 +54,14 @@ public class MainRouter {
         let story = UIStoryboard.init(name: self.storyboard, bundle: nil)
         let controller = story.instantiateViewController(withIdentifier: type_ctr.get_storyboard_name()) as! T
         return controller
+    }
+    
+    public func pop_to(act:RouteTable) -> UIViewController? {
+        return nil
+    }
+    
+    public func fly_to(act:RouteTable,title:String = "")->UIViewController? {
+        return nil
     }
     
 }

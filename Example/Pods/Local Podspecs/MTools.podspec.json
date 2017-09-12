@@ -1,9 +1,9 @@
 {
   "name": "MTools",
   "version": "0.1.0",
-  "summary": "A short description of MTools.",
+  "summary": "My own classes",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/drumsland@gmail.com/MTools",
+  "homepage": "https://github.com/chadoneba/MTools",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,11 +12,20 @@
     "drumsland@gmail.com": "drumsland@gmail.com"
   },
   "source": {
-    "git": "https://github.com/drumsland@gmail.com/MTools.git",
+    "git": "https://github.com/chadoneba/MTools.git",
     "tag": "0.1.0"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "MTools/Classes/**/*"
+  "source_files": "MTools/Classes/**/*",
+  "frameworks": [
+    "UIKit",
+    "CoreData"
+  ],
+  "dependencies": {
+    "SwiftyJSON": [
+      "4.0.0-alpha.1"
+    ]
+  }
 }

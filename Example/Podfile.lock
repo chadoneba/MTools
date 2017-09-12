@@ -1,5 +1,7 @@
 PODS:
-  - MTools (0.1.0)
+  - MTools (0.1.0):
+    - SwiftyJSON (= 4.0.0-alpha.1)
+  - SwiftyJSON (4.0.0-alpha.1)
 
 DEPENDENCIES:
   - MTools (from `../`)
@@ -9,7 +11,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  MTools: edaf080fbf181dff51f491ffaed07dc35495a46b
+  MTools: e3d14ee7bc921fb5522f262bf10b98e0c0ffee42
+  SwiftyJSON: dc88934f85fb50b263b1632b9cbad3402505783e
 
 PODFILE CHECKSUM: 2643041fed12a08da5bfd45db987866fda12e687
 
