@@ -23,66 +23,66 @@ public protocol PresenterProtocol {
 }
 
 
-public class BasePresenter:RouterProtocol,sessionNotification {
-    public var connecter:PureManager!
-    public var delegate:PresenterProtocol?
-    public var router:MainRouter?
+open class BasePresenter:RouterProtocol,sessionNotification {
+    open var connecter:PureManager!
+    open var delegate:PresenterProtocol?
+    open var router:MainRouter?
     
     public init() {
         self.connecter = PureManager.TheInstance
         self.connecter.delegate = self
     }
     
-    public func invalidate() {
+    open func invalidate() {
         DispatchQueue.main.async {
             self.delegate?.logOut()
         }
     }
     
-    public func reload(){
+    open func reload(){
         DispatchQueue.main.async {
             self.delegate?.reload()
         }
     }
     
-    public func pop() {
+    open func pop() {
         DispatchQueue.main.async {
             self.delegate?.pop()
         }
     }
     
-    public func popToTarget(_ to:[UIViewController]) {
+    open func popToTarget(_ to:[UIViewController]) {
         DispatchQueue.main.async {
             self.delegate?.popToTarget(to)
         }
     }
     
-    public func route(to:UIViewController) {
+    open func route(to:UIViewController) {
         DispatchQueue.main.async {
             self.delegate?.route(to: to)
         }
     }
 
 
-    public func showDialog(dialog: UIAlertController) {
+    open func showDialog(dialog: UIAlertController) {
         DispatchQueue.main.async {
             self.delegate?.showDialog(dialog: dialog)
         }
     }
 
-    public func loader() {
+    open func loader() {
         DispatchQueue.main.async {
             self.delegate?.showLoader()
         }
     }
     
-    public func showError(_ msg:String){
+    open func showError(_ msg:String){
         DispatchQueue.main.async {
             self.delegate?.showError(message: msg)
         }
     }
 
-    public func successDialog(msg:String,reloadData:Bool = true, title:String = "", handlerOne1:@escaping ()->Void) -> UIAlertController {
+    open func successDialog(msg:String,reloadData:Bool = true, title:String = "", handlerOne1:@escaping ()->Void) -> UIAlertController {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler:{ action in

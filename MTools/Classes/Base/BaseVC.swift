@@ -8,27 +8,27 @@
 
 import UIKit
 
-public class BaseVC:UIViewController, PresenterProtocol {
+open class BaseVC:UIViewController, PresenterProtocol {
     
 //    override var preferredStatusBarStyle: UIStatusBarStyle {
 //        return .lightContent
 //    }
 
-    public func showLoader() {
+    open func showLoader() {
         //TODO: override
     }
 
-    public func hideLoader() {
+    open func hideLoader() {
         //TODO: override
     }
 
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     
-    public func showError(message: String) {
+    open func showError(message: String) {
 
         // TODO: take name of app
         
@@ -42,7 +42,7 @@ public class BaseVC:UIViewController, PresenterProtocol {
 
     }
     
-    public func pop() {
+    open func pop() {
         guard self.navigationController != nil else {
             self.dismiss(animated: true)
             return
@@ -51,7 +51,7 @@ public class BaseVC:UIViewController, PresenterProtocol {
         
     }
     
-    public func popToTarget(_ to:[UIViewController]) {
+    open func popToTarget(_ to:[UIViewController]) {
         let conditions = to.map {
             ($0 as! BaseVC).get_storyboard_name()
         }
@@ -71,16 +71,16 @@ public class BaseVC:UIViewController, PresenterProtocol {
     }
     
     
-    public func showDialog(dialog: UIAlertController) {
+    open func showDialog(dialog: UIAlertController) {
         self.present(dialog, animated: true, completion: nil)
     }
 
-    public func reload() {
+    open func reload() {
         self.hideLoader()
     }
     
     
-    public func route(to:UIViewController){
+    open func route(to:UIViewController){
 
         if to.modalPresentationStyle == .overCurrentContext {
             if to.navigationController != nil {
@@ -94,7 +94,7 @@ public class BaseVC:UIViewController, PresenterProtocol {
         }
     }
     
-    public func get_storyboard_name()->String {
+    open func get_storyboard_name()->String {
         return "NO"
     }
     
@@ -104,11 +104,11 @@ public class BaseVC:UIViewController, PresenterProtocol {
 //        UIApplication.shared.delegate?.window??.rootViewController = auth
 //    }
     
-    public func logOut() {
+    open func logOut() {
         
     }
 
-    public func set_presenter(presenter_par: RouterProtocol) {
+    open func set_presenter(presenter_par: RouterProtocol) {
         
     }
     
