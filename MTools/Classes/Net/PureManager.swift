@@ -155,7 +155,7 @@ public class PureManager:NSObject,URLSessionDelegate {
         // self.get_headers(params: params)
         
         print("Адрес -----------------------")
-        print(path)
+        print(host + path)
         
         for (key,value) in params {
             print ("\(key)=\(value)")
