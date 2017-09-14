@@ -77,6 +77,11 @@ public class PureManager:NSObject,URLSessionDelegate {
     var host:String!
     var delegate:sessionNotification?
     let debugServerAdr = "http://192.168.1.72:8002"
+    var method:MethodType = .POST
+    
+    public func setGetType() {
+        self.method = .GET
+    }
 
     
     public func logout() {
@@ -144,6 +149,8 @@ public class PureManager:NSObject,URLSessionDelegate {
 
 
         let reqMan = RequestManager(host: path == DEBUGLOCAL ? debugServerAdr : host + path)
+        reqMan.type = self.method
+        self.method = .POST
         if image != nil {
             reqMan.getImageRequest(params: params as! [String:String], image: image!)
         } else if (params as? [String:String]) == nil {
@@ -155,7 +162,7 @@ public class PureManager:NSObject,URLSessionDelegate {
         // self.get_headers(params: params)
         
         print("Адрес -----------------------")
-        print(host + path)
+        print(path)
         
         for (key,value) in params {
             print ("\(key)=\(value)")
