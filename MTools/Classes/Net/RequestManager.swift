@@ -86,6 +86,10 @@ class RequestManager {
         request.httpBody = data.data(using: String.Encoding.utf8)
     }
     
+    func getRequestFrom(str:String) {
+        request.httpBody = str.data(using: String.Encoding.utf8)
+    }
+    
     
     // TODO: код взят с
     // https://newfivefour.com/swift-form-data-multipart-upload-URLRequest.html

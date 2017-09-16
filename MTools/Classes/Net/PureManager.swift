@@ -133,7 +133,7 @@ public class PureManager:NSObject,URLSessionDelegate {
     // params - строковый словарь параметров
     // handler - колбек
     
-    public func connect(path:String,params:[String:Any],image:UIImage?,handler:@escaping (Data?,URLResponse?,Error?)-> Void) {
+    public func connect(path:String,params:[String:Any],image:UIImage?,byString:String?,handler:@escaping (Data?,URLResponse?,Error?)-> Void) {
         guard self.host != nil else {
             self.delegate!.invalidate()
             return
@@ -155,6 +155,8 @@ public class PureManager:NSObject,URLSessionDelegate {
             reqMan.getImageRequest(params: params as! [String:String], image: image!)
         } else if (params as? [String:String]) == nil {
             reqMan.getJsonRequest(params: params)
+        } else if byString != nil {
+            reqMan.getRequestFrom(str: byString ?? "")
         } else {
             reqMan.getSimpleRequest(params: params as! [String:String])
         }
@@ -189,7 +191,12 @@ public class PureManager:NSObject,URLSessionDelegate {
     
     public func connect(path:String,params:[String:Any],handler:@escaping (Data?,URLResponse?,Error?)-> Void)
     {
-        self.connect(path: path, params: params, image: nil, handler: handler)
+        self.connect(path: path, params: params, image: nil,byString: nil, handler: handler)
+    }
+    
+    public func connect(path:String,params:[String:Any],byString:String?,handler:@escaping (Data?,URLResponse?,Error?)-> Void)
+    {
+        self.connect(path: path, params: params, image: nil,byString: byString, handler: handler)
     }
     
     // Автоматическая функция, возвращает заголовок типа если в параметрах есть русские буквы
