@@ -1,10 +1,3 @@
-//
-//  RequestManager.swift
-//  FSMobile
-//
-//  Created by Aziz Said-Malik on 28.04.17.
-//  Copyright © 2017 Aziz Said-Malik. All rights reserved.
-//
 
 import Foundation
 import UIKit

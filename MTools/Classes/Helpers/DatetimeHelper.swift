@@ -1,10 +1,3 @@
-//
-//  DatetimeHelper.swift
-//  FSMobile
-//
-//  Created by Aziz Said-Malik. on 01.02.17.
-//  Copyright © 2017 Aziz Said-Malik. All rights reserved.
-//
 
 import Foundation
 

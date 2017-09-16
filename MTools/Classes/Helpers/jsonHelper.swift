@@ -1,7 +1,3 @@
-//
-// Created by Mikhail Maltsev on 06.06.17.
-// Copyright (c) 2017 Aziz Said-Malik. All rights reserved.
-//
 
 import Foundation
 import SwiftyJSON

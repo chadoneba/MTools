@@ -1,10 +1,3 @@
-//
-//  Helper+Array.swift
-//  FSMobile
-//
-//  Created by Aziz Said-Malik on 04.01.17.
-//  Copyright © 2017 Aziz Said-Malik. All rights reserved.
-//
 
 import Foundation
 

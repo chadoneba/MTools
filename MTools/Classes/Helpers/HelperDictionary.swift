@@ -1,10 +1,3 @@
-//
-//  HelperDictionary.swift
-//  FSMobile
-//
-//  Created by Aziz Said-Malikv on 18.12.16.
-//  Copyright © 2016 Aziz Said-Malik. All rights reserved.
-//
 
 import Foundation
 
