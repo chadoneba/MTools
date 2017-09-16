@@ -87,6 +87,7 @@ class RequestManager {
     }
     
     func getRequestFrom(str:String) {
+        print(str)
         request.httpBody = str.data(using: String.Encoding.utf8)
     }
     
