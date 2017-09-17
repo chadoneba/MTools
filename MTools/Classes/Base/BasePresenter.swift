@@ -17,12 +17,13 @@ public protocol PresenterProtocol {
 }
 
 
-open class BasePresenter:RouterProtocol,sessionNotification {
+open class BasePresenter:NSObject,RouterProtocol,sessionNotification {
     open var connecter:PureManager!
     open var delegate:PresenterProtocol?
     open var router:MainRouter?
     
-    public init() {
+    public override init() {
+        super.init()
         self.connecter = PureManager.TheInstance
         self.connecter.delegate = self
     }
