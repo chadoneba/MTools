@@ -19,6 +19,7 @@
 		2E77817DFAE8858922118104C73184EE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A686915E05910F7AF730DE8AE70D09 /* CoreData.framework */; };
 		396C55B8341B8CE29336DF2D55E51D8E /* jsonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E9454B43A0093B7EFC8CA0AACF2232 /* jsonHelper.swift */; };
 		4BD56FD43C2EE8348FBED5683A312529 /* Pods-MTools_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 81C75E93548B130729EBBB5182E7B3E4 /* Pods-MTools_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5A5390B01F703627002E479A /* MTImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5390AF1F703627002E479A /* MTImageSlider.swift */; };
 		5AB5C8DF1F6F368000C07F7E /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB5C8DE1F6F368000C07F7E /* Views.swift */; };
 		872E636626FB98F041CF6303859B9012 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B05BA81E82411EDB29657C6287AC2D2 /* SwiftyJSON.framework */; };
 		A1577AAADA3CE0C05B9332B7AC6BE8BB /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF1A7981031FA67054A38CCFA4E070 /* RequestManager.swift */; };
@@ -73,6 +74,7 @@
 		3F9E1DFAB074AF6B46968ED7F88B36E7 /* MainRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		44A686915E05910F7AF730DE8AE70D09 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		45CABC0116A2CF480B5A813159793587 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A5390AF1F703627002E479A /* MTImageSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MTImageSlider.swift; path = MTools/Classes/Views/MTImageSlider.swift; sourceTree = "<group>"; };
 		5AB5C8DE1F6F368000C07F7E /* Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
 		5B05BA81E82411EDB29657C6287AC2D2 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BF83F8CD6DD469B61BCEFC694111517 /* Pods-MTools_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MTools_Tests-dummy.m"; sourceTree = "<group>"; };
@@ -193,6 +195,14 @@
 			path = MTools/Classes/Route;
 			sourceTree = "<group>";
 		};
+		5A5390AE1F703611002E479A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5A5390AF1F703627002E479A /* MTImageSlider.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		6063692800C0C9F76C538EFF72DAB43A /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +223,7 @@
 		724E5062EC8D07BE479C5EEEAE00A2C4 /* MTools */ = {
 			isa = PBXGroup;
 			children = (
+				5A5390AE1F703611002E479A /* Views */,
 				76FE7DFE0B0B1309F77C322EC5E612D2 /* Base */,
 				DB9289C5BABC7B7B8584513B48259F72 /* Helpers */,
 				2E5EF7DA377D0F47F3D43C7013EFC2ED /* Net */,
@@ -455,6 +466,7 @@
 				E1218F240E3647890DC307DE0D8D004E /* PureManager.swift in Sources */,
 				A1577AAADA3CE0C05B9332B7AC6BE8BB /* RequestManager.swift in Sources */,
 				D1E641DB9A1ED5EAC76E5CCEBF13C8AA /* Utils.swift in Sources */,
+				5A5390B01F703627002E479A /* MTImageSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
