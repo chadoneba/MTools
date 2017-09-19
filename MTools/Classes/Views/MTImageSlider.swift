@@ -79,9 +79,13 @@ open class MTImageSlider:UIView,UIScrollViewDelegate {
 
     override open func didMoveToSuperview() {
         super.didMoveToSuperview()
-
+        self.start()
+    }
+    
+    
+    open func start() {
         self.setUpView()
-
+        
         for index in 0..<self.urls!.count {
             self.imageLoad(index: index)
         }
