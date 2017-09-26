@@ -4,7 +4,11 @@ import Foundation
 
 open class UserData {
     
-    open static let standart = UserDefaults.standard
+    open static var standart:UserDefaults {
+        get {
+            return UserDefaults.standard
+        }
+    }
     
 //    static var id:String {
 //        get {
