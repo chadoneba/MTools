@@ -2,7 +2,9 @@
 import Foundation
 
 
-public class UserData {
+open class UserData {
+    
+    public static let standart = UserDefaults.standard
     
 //    static var id:String {
 //        get {
@@ -36,12 +38,10 @@ public class UserData {
     
     public static var url:String? {
         get {
-            let standart = UserDefaults.standard
             return standart.string(forKey: "cur_url")
         }
         
         set {
-            let standart = UserDefaults.standard
             standart.set(newValue, forKey: "cur_url")
         }
     }
