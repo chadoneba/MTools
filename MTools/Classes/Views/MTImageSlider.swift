@@ -59,7 +59,7 @@ open class MTImageSlider:UIView,UIScrollViewDelegate {
         self.scroll!.contentOffset = CGPoint(x: 0, y: 0)
         self.scroll!.isPagingEnabled = true
         self.scroll!.isScrollEnabled = true
-        self.scroll!.backgroundColor = UIColor.red
+        self.scroll!.backgroundColor = UIColor.black
         self.addSubview(self.scroll!)
         
         self.pageControl!.center = CGPoint(x: self.center.x, y: self.frame.height - 10.0)
