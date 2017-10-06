@@ -84,6 +84,7 @@ open class BaseVC:UIViewController, PresenterProtocol {
         }
         else {
             self.navigationController?.pushViewController(to, animated: true)
+            print("В роуте")
         }
     }
     

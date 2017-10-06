@@ -4,7 +4,7 @@ import UIKit
 
 // Протокол для обобщения разных подклассов презентеров
 
-public protocol RouterProtocol {
+public protocol RouterProtocol:NSObjectProtocol {
     var delegate:PresenterProtocol? { get set }
 }
 
@@ -36,6 +36,7 @@ public class MainRouter {
         let controller = getController(type_ctr: type_ctr)
         presenter.delegate = controller
         controller.set_presenter(presenter_par: presenter)
+        print("Тут отдаем контроллер \(controller.classForCoder) и \(presenter.description)")
         return controller
     }
     

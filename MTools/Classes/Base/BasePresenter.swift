@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-public protocol PresenterProtocol {
+public protocol PresenterProtocol:NSObjectProtocol {
     func reload()
     func logOut()
     func showLoader()
@@ -19,7 +19,7 @@ public protocol PresenterProtocol {
 
 open class BasePresenter:NSObject,RouterProtocol,sessionNotification {
     open var connecter:PureManager!
-    open var delegate:PresenterProtocol?
+    weak open var delegate:PresenterProtocol?
     open var router:MainRouter?
     
     public override init() {
@@ -80,7 +80,7 @@ open class BasePresenter:NSObject,RouterProtocol,sessionNotification {
     open func successDialog(msg:String,reloadData:Bool = true, title:String = "", handlerOne1:@escaping ()->Void) -> UIAlertController {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler:{ action in
+        alert.addAction(UIAlertAction(title: "", style: .cancel, handler:{ action in
             if reloadData == true {
                 handlerOne1()
             } else {
