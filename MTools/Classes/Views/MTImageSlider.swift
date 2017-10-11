@@ -75,6 +75,8 @@ open class MTImageSlider:UIView,UIScrollViewDelegate {
             self.scroll?.addSubview(page)
         }
 
+        self.pageControl!.alpha = self.pages.count > 1 ? 1.0 : 0.0
+
     }
 
     override open func didMoveToSuperview() {
