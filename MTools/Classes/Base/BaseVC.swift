@@ -3,11 +3,12 @@ import UIKit
 
 open class BaseVC:UIViewController, PresenterProtocol {
     
+    var titleLabel = (Bundle.main.infoDictionary?[kCFBundleNameKey as! String] as? String) ?? ""
 //    override var preferredStatusBarStyle: UIStatusBarStyle {
 //        return .lightContent
 //    }
 
-    open func showLoader() {
+    open func showLoader(_ err:Bool = false) {
         //TODO: override
     }
 
@@ -25,8 +26,12 @@ open class BaseVC:UIViewController, PresenterProtocol {
 
         // TODO: take name of app
         
-        let alert = UIAlertController.init(title: "", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: "Закрыть", style: .default))
+        let alert = UIAlertController.init(title: self.titleLabel, message: message, preferredStyle: .alert)
+        if #available(iOS 9.0, *) {
+            alert.addAction(UIAlertAction(title: "Cancel".localizedCapitalized, style: .cancel))
+        } else {
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        }
         self.present(alert, animated: true) {}
     }
 
@@ -84,7 +89,6 @@ open class BaseVC:UIViewController, PresenterProtocol {
         }
         else {
             self.navigationController?.pushViewController(to, animated: true)
-            print("В роуте")
         }
     }
     

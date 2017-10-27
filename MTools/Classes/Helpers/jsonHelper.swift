@@ -3,7 +3,7 @@ import Foundation
 import SwiftyJSON
 
 public func objToJsonString(_ params:Any) -> String {
-    guard let data = objToData(_params: params) else {
+    guard let data = objToData(params) else {
         return ""
     }
     return String(data: data, encoding: .utf8 ) ?? ""

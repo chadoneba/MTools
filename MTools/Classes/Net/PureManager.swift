@@ -17,26 +17,25 @@ public extension Parceble {
     
     // Вывод свойств классов протокола Parceble в словарь с фильтрацией по словарю ключей
     
-    public func toJson(_ template:[String] = [])->[String:String] {
+    public func toJson<T>(_ template:[String] = [],_ parent:Bool = true)->[String:T] {
         guard template.count > 0 else {
             return [:]
         }
-        var return_dict = [String:String]()
+        var return_dict = [String:T]()
         let main_mirror = Mirror.init(reflecting: self)
         return_dict += self.getDictBy(mirror: main_mirror, template: template)
-        if let super_mirror = main_mirror.superclassMirror {
-            return_dict += self.getDictBy(mirror: super_mirror, template: template)
+        if parent {
+            if let super_mirror = main_mirror.superclassMirror {
+                return_dict += self.getDictBy(mirror: super_mirror, template: template)
+            }
         }
         return return_dict
     }
 
-    
-    
-    
     // Собственно функция фильтрации
     
-    public func getDictBy(mirror:Mirror,template:[String])->[String:String] {
-        var return_dict = [String:String]()
+    public func getDictBy<T>(mirror:Mirror,template:[String])->[String:T] {
+        var return_dict = [String:T]()
         
         var doesApplyAll = false
         
@@ -45,10 +44,13 @@ public extension Parceble {
         }
         
         for obj in mirror.children {
-            
             if template.contains(obj.label!) || doesApplyAll {
-                if ((obj.value as? String) != nil) {
-                    return_dict.updateValue(obj.value as! String, forKey: obj.label!)
+
+                if obj.value != nil {
+                    guard let value = obj.value as? T else {
+                        continue
+                    }
+                    return_dict.updateValue(value, forKey: obj.label!)
                 }
                 
             }
@@ -164,18 +166,18 @@ public class PureManager:NSObject,URLSessionDelegate {
             print ("\(key)=\(value)")
         }
         
-        let wrap_func:(Data?,URLResponse?,Error?)-> Void = decorate(handler) { args, _ in
-            let (_,res,_) = args
-            guard res != nil else {
-                self.delegate?.invalidate()
-                return
-            }
-            if (res as! HTTPURLResponse).statusCode == 401 {
-                self.delegate?.invalidate()
-            }
-        }
+//        let wrap_func:(Data?,URLResponse?,Error?)-> Void = decorate(handler) { args, _ in
+//            let (_,res,_) = args
+//            guard res != nil else {
+//                self.delegate?.invalidate()
+//                return
+//            }
+//            if (res as! HTTPURLResponse).statusCode == 401 {
+//                self.delegate?.invalidate()
+//            }
+//        }
         
-        let task = self.session.dataTask(with: reqMan.request, completionHandler: wrap_func)
+        let task = self.session.dataTask(with: reqMan.request, completionHandler: handler)
         task.currentRequest?.allHTTPHeaderFields.map { key in
 //            print("\(key)")
         }

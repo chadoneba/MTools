@@ -6,7 +6,7 @@ import UIKit
 public protocol PresenterProtocol:NSObjectProtocol {
     func reload()
     func logOut()
-    func showLoader()
+    func showLoader(_ err:Bool)
     func showError(message: String)
     func route(to:UIViewController)
     func pop()
@@ -67,7 +67,7 @@ open class BasePresenter:NSObject,RouterProtocol,sessionNotification {
 
     open func loader() {
         DispatchQueue.main.async {
-            self.delegate?.showLoader()
+            self.delegate?.showLoader(false)
         }
     }
     

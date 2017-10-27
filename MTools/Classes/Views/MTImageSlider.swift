@@ -40,13 +40,16 @@ open class MTImageSlider:UIView,UIScrollViewDelegate {
                 return
             }
             
-            let image = UIImage(data: data!)
-            UIGraphicsBeginImageContext(self.pages[0].frame.size)
-            image?.draw(in: self.pages[0].bounds)
-            let res:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
+            DispatchQueue.main.async {
+                let image = UIImage(data: data!)
+                UIGraphicsBeginImageContext(self.pages[0].frame.size)
+                image?.draw(in: self.pages[0].bounds)
+                let res:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+                UIGraphicsEndImageContext()
+                self.pages[index].image = res
+            }
             
-            self.pages[index].image = res
+            
         }
         task.resume()
     }

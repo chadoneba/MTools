@@ -36,7 +36,6 @@ public class MainRouter {
         let controller = getController(type_ctr: type_ctr)
         presenter.delegate = controller
         controller.set_presenter(presenter_par: presenter)
-        print("Тут отдаем контроллер \(controller.classForCoder) и \(presenter.description)")
         return controller
     }
     
