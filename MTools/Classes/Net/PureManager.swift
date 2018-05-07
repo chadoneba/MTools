@@ -3,7 +3,7 @@
 import Foundation
 import SwiftyJSON
 
-let DEBUGLOCAL = "debugLocal"
+public let DEBUGLOCAL = "debugLocal"
 
 public protocol Parceble {
     init(json:[String:Any]!)
@@ -17,24 +17,28 @@ public extension Parceble {
     
     // Вывод свойств классов протокола Parceble в словарь с фильтрацией по словарю ключей
     
-    public func toJson<T>(_ template:[String] = [],_ parent:Bool = true)->[String:T] {
+    public func toJson<T>(_ template:[String] = [],_ parent:Bool = true,_ placeholder:T? = nil)->[String:T] {
         guard template.count > 0 else {
             return [:]
         }
         var return_dict = [String:T]()
         let main_mirror = Mirror.init(reflecting: self)
-        return_dict += self.getDictBy(mirror: main_mirror, template: template)
+        return_dict += self.getDictBy(mirror: main_mirror, template: template,placeholder)
         if parent {
             if let super_mirror = main_mirror.superclassMirror {
-                return_dict += self.getDictBy(mirror: super_mirror, template: template)
+                return_dict += self.getDictBy(mirror: super_mirror, template: template,placeholder)
             }
         }
+
         return return_dict
     }
 
+
+
+
     // Собственно функция фильтрации
     
-    public func getDictBy<T>(mirror:Mirror,template:[String])->[String:T] {
+    public func getDictBy<T>(mirror:Mirror,template:[String],_ placeholder:T? = nil)->[String:T] {
         var return_dict = [String:T]()
         
         var doesApplyAll = false
@@ -45,14 +49,16 @@ public extension Parceble {
         
         for obj in mirror.children {
             if template.contains(obj.label!) || doesApplyAll {
-
                 if obj.value != nil {
                     guard let value = obj.value as? T else {
                         continue
                     }
                     return_dict.updateValue(value, forKey: obj.label!)
+                } else {
+                    if placeholder != nil {
+                        return_dict.updateValue(placeholder!, forKey: obj.label!)
+                    }
                 }
-                
             }
         }
         return return_dict
@@ -72,11 +78,21 @@ public class PureManager:NSObject,URLSessionDelegate {
     var session_delegate:URLSessionDelegate?
     var host:String!
     var delegate:sessionNotification?
-    let debugServerAdr = "http://192.168.1.72:8002"
+    let debugServerAdr = "http://127.0.0.1:5000"
     var method:MethodType = .POST
+    var headers:[String:String]?
+
+
+    public func setConstant(headers:[String:String]) {
+        self.headers = headers
+    }
+
+    public func killConstHeaders() {
+        self.headers = nil
+    }
     
-    public func setGetType() {
-        self.method = .GET
+    public func setType(_ tp:MethodType = .GET) {
+        self.method = tp
     }
 
     
@@ -91,7 +107,7 @@ public class PureManager:NSObject,URLSessionDelegate {
     
     
     
-    static let instance:PureManager = PureManager()
+    private static let instance:PureManager = PureManager()
     
     
     public static var TheInstance : PureManager {
@@ -146,6 +162,7 @@ public class PureManager:NSObject,URLSessionDelegate {
 
         let reqMan = RequestManager(host: path == DEBUGLOCAL ? debugServerAdr : host + path)
         reqMan.type = self.method
+        reqMan.headers = (self.headers ?? [:]) + (self.method == MethodType.PUT ? ["Content-Type":"application/x-www-form-urlencoded"] : [:])
         self.method = .POST
         if image != nil {
             reqMan.getImageRequest(params: params as! [String:String], image: image!)
@@ -165,6 +182,14 @@ public class PureManager:NSObject,URLSessionDelegate {
         for (key,value) in params {
             print ("\(key)=\(value)")
         }
+
+        print("Headers -----------------------")
+        
+        for (key,value) in reqMan.request.allHTTPHeaderFields ?? [:] {
+            print ("\(key)=\(value)")
+        }
+
+
         
 //        let wrap_func:(Data?,URLResponse?,Error?)-> Void = decorate(handler) { args, _ in
 //            let (_,res,_) = args

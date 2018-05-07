@@ -38,6 +38,15 @@ extension String {
         return self.isLatin && self.isCyrillic
     }
 }
+
+
+extension Optional where Wrapped == String {
+    public var isEmptyOrNil:Bool {
+        get {
+            return self?.isEmpty ?? true
+        }
+    }
+}
 //extension UILabel {
 //    func htmlRecognizer(html: String) {
 //        if let htmlData = html.data(using: String.Encoding.unicode) {

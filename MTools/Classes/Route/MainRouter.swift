@@ -44,7 +44,12 @@ public class MainRouter {
         let controller = story.instantiateViewController(withIdentifier: type_ctr.get_storyboard_name()) as! T
         return controller
     }
-    
+
+    public func getController<T:UIViewController>(type:String)->T {
+        let story = UIStoryboard.init(name: self.storyboard, bundle: nil)
+        let controller = story.instantiateViewController(withIdentifier: type) as! T
+        return controller
+    }
     
 }
 

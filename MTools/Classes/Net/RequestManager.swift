@@ -2,8 +2,8 @@
 import Foundation
 import UIKit
 
-enum MethodType:String {
-    case POST,GET
+public enum MethodType:String {
+    case POST,GET,PUT,DELETE
 }
 
 class RequestManager {

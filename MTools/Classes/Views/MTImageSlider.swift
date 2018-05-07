@@ -9,7 +9,7 @@ import UIKit
 
 open class MTImageSlider:UIView,UIScrollViewDelegate {
     var pages = [UIImageView]()
-    public var urls:[String]?
+    public var urls:[String] = [String]() 
     lazy var session = URLSession.shared
     
     var scroll:UIScrollView?
@@ -34,7 +34,10 @@ open class MTImageSlider:UIView,UIScrollViewDelegate {
     }
 
     func imageLoad(index:Int) {
-        let task = session.dataTask(with: URL(string: self.urls![index])!) {
+        guard let url = URL(string: self.urls[index]) else {
+            return
+        }
+        let task = session.dataTask(with: url) {
             data, _ , err in
             guard data != nil && err == nil else {
                 return
@@ -48,8 +51,6 @@ open class MTImageSlider:UIView,UIScrollViewDelegate {
                 UIGraphicsEndImageContext()
                 self.pages[index].image = res
             }
-            
-            
         }
         task.resume()
     }
@@ -58,7 +59,7 @@ open class MTImageSlider:UIView,UIScrollViewDelegate {
     func setUpView() {
         self.scroll!.frame = CGRect(origin: .zero, size: CGSize(width: self.frame.width, height: self.frame.height))
 
-        self.scroll!.contentSize = CGSize( width: self.frame.width * CGFloat(self.urls!.count), height: self.frame.height)
+        self.scroll!.contentSize = CGSize( width: self.frame.width * CGFloat(self.urls.count), height: self.frame.height)
         self.scroll!.contentOffset = CGPoint(x: 0, y: 0)
         self.scroll!.isPagingEnabled = true
         self.scroll!.isScrollEnabled = true
@@ -68,10 +69,10 @@ open class MTImageSlider:UIView,UIScrollViewDelegate {
         self.pageControl!.center = CGPoint(x: self.center.x, y: self.frame.height - 10.0)
         self.addSubview(self.pageControl!)
         self.pageControl!.backgroundColor = UIColor.black
-        self.pageControl!.size(forNumberOfPages: self.urls!.count)
-        self.pageControl!.numberOfPages = self.urls!.count
+        self.pageControl!.size(forNumberOfPages: self.urls.count)
+        self.pageControl!.numberOfPages = self.urls.count
         
-        for i in 0..<self.urls!.count {
+        for i in 0..<self.urls.count {
             let page = UIImageView(image: UIImage(color: .gray, size: CGSize(width: self.frame.width, height: self.frame.height)))
             page.frame = CGRect(x: self.frame.width  * CGFloat(i), y: 0, width: self.frame.width, height: self.frame.height)
             self.pages.append(page)
@@ -84,14 +85,16 @@ open class MTImageSlider:UIView,UIScrollViewDelegate {
 
     override open func didMoveToSuperview() {
         super.didMoveToSuperview()
-        self.start()
+        if self.urls.count > 0 {
+            self.start()
+        }
     }
     
     
     open func start() {
         self.setUpView()
         
-        for index in 0..<self.urls!.count {
+        for index in 0..<self.urls.count {
             self.imageLoad(index: index)
         }
     }

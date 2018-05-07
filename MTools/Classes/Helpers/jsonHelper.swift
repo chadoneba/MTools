@@ -12,8 +12,6 @@ public func objToJsonString(_ params:Any) -> String {
 
 public class JsonChecker {
 
-
-
     var json:JSON?
 
     public var getDictionary:Dictionary<String,Any>? {
@@ -29,16 +27,13 @@ public class JsonChecker {
 
     public init(data:Data?) {
         guard data != nil else { return }
-        do {
-            try self.json = try JSON(data: data!)
-        } catch  {
-            
-        }
+            self.json = try? JSON(data: data!)
     }
 
     public init(data:String?) {
         guard data != nil else { return }
         self.json = JSON(parseJSON: data!)
+        print("OK")
     }
 
     public init(data:[AnyHashable : Any]) {
@@ -61,7 +56,9 @@ public class JsonChecker {
         if key != nil && self.json!.dictionaryObject != nil {
             guard let result = json!.dictionaryValue[key!] else { return nil }
             guard let list = result.arrayObject else { return nil }
-            return list.map { T(json: $0 as! [String:Any]) }
+            return list.map {
+                T(json: $0 as? [String:Any])
+            }
         }
         guard let list = json!.arrayObject else { return nil }
         return list.map { T(json: $0 as! [String:Any]) }
@@ -76,6 +73,12 @@ public func objToData(_ params:Any) -> Data? {
         return nil
     }
     return data
+}
+
+public func packToForm(formName:String,params:[String:Any])->String {
+    return params.map {
+        return "\(formName)[\($0.key)]=\($0.value ?? "")"
+    }.joined(separator: "&")
 }
 
 
