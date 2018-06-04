@@ -15,14 +15,14 @@ public class JsonChecker {
     var json:JSON?
 
     public var getDictionary:Dictionary<String,Any>? {
-        return self.json!.dictionaryObject
+        return self.json?.dictionaryObject
     }
 
     public subscript(key:String) -> Any? {
-        guard self.json!.dictionaryObject != nil else {
+        guard self.json?.dictionaryObject != nil else {
             return nil
         }
-        return self.json!.dictionaryObject![key]
+        return self.json?.dictionaryObject?[key]
     }
 
     public init(data:Data?) {
@@ -42,8 +42,8 @@ public class JsonChecker {
 
     public func getModelByField<T:Parceble>(_ key:String? = nil) -> T? {
         guard self.json != nil else { return nil }
-        if key != nil && self.json!.dictionaryObject != nil {
-            guard let result = json!.dictionaryValue[key!] else { return nil }
+        if key != nil && self.json?.dictionaryObject != nil {
+            guard let result = json?.dictionaryValue[key!] else { return nil }
             guard let model = result.dictionaryObject else { return nil }
             return T(json: model)
         }

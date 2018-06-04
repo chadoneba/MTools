@@ -31,8 +31,6 @@ public class MainRouter {
     // Возвращает настроенный контроллер для использования в любом типе перехода
     
     public func getController<T:UIViewController ,U:RouterProtocol>(type_ctr:T, presenter:inout U)->T where T:PresenterProtocol {
-//        let story = UIStoryboard.init(name: "Main", bundle: nil)
-//        let controller = story.instantiateViewController(withIdentifier: type_ctr.get_storyboard_name()) as! T
         let controller = getController(type_ctr: type_ctr)
         presenter.delegate = controller
         controller.set_presenter(presenter_par: presenter)
